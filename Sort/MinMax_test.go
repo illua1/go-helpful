@@ -33,11 +33,17 @@ func TestMax(t *testing.T){
       []int{1,2,3,4,5,67,8,89,0,1544},
       []int{555,222,888,111,000,-11,55},
       []int{654,557,157875,156,11},
+      []int{654,557,157875},
+      []int{654,557},
+      []int{654},
     }
     max = []int{
       1544,
       888,
       157875,
+      157875,
+      654,
+      654,
     }
   )
   for i := range list {
@@ -70,11 +76,19 @@ func TestMin(t *testing.T){
       []int{1,2,3,4,5,67,8,89,0,1544},
       []int{555,222,888,111,000,-11,55},
       []int{654,557,157875,156,11},
+      []int{654,557,157875,156},
+      []int{654,557,157875},
+      []int{654,557},
+      []int{654},
     }
     min = []int{
       0,
       -11,
       11,
+      156,
+      557,
+      557,
+      654,
     }
   )
   for i := range list {
@@ -107,11 +121,17 @@ func TestMaxId(t *testing.T){
       []int{1,2,3,4,5,67,8,89,0,1544},
       []int{555,222,888,111,000,-11,55},
       []int{654,557,157875,156,11},
+      []int{654,557,157875},
+      []int{654,557},
+      []int{654},
     }
     max = []int{
       9,
       2,
       2,
+      2,
+      0,
+      0,
     }
   )
   for i := range list {
@@ -144,16 +164,100 @@ func TestMinId(t *testing.T){
       []int{1,2,3,4,5,67,8,89,0,1544},
       []int{555,222,888,111,000,-11,55},
       []int{654,557,157875,156,11},
+      []int{654,557,157875},
+      []int{654,557},
+      []int{654},
     }
     min = []int{
       8,
       5,
       4,
+      1,
+      1,
+      0,
     }
   )
   for i := range list {
     if MinId(list[i]...) != min[i] {
       t.Error("MinId at", list[i], " is not at index",min[i])
+    }
+  }
+}
+
+func TestPickAnyId(t *testing.T){
+  var(
+    list = [][]int{
+      []int{1,2,3,4,5,67,8,89,0,1544},
+      []int{555,222,888,111,000,-11,55},
+      []int{654,557,157875,156,11},
+      []int{654,557,157875},
+      []int{654,557},
+      []int{654},
+    }
+    min = []int{
+      8,
+      5,
+      4,
+      1,
+      1,
+      0,
+    }
+    max = []int{
+      9,
+      2,
+      2,
+      2,
+      0,
+      0,
+    }
+  )
+  for i := range list {
+    if PickAnyId(func(a,b int)bool{return a>b}, list[i]...) != max[i] {
+      t.Error("PickAnyId (>) at", list[i], " is not at index",min[i])
+    }
+  }
+  for i := range list {
+    if PickAnyId(func(a,b int)bool{return a<b}, list[i]...) != min[i] {
+      t.Error("PickAnyId (<) at", list[i], " is not at index",min[i])
+    }
+  }
+}
+
+func TestPickAny(t *testing.T){
+  var(
+    list = [][]int{
+      []int{1,2,3,4,5,67,8,89,0,1544},
+      []int{555,222,888,111,000,-11,55},
+      []int{654,557,157875,156,11},
+      []int{654,557,157875},
+      []int{654,557},
+      []int{654},
+    }
+    min = []int{
+      0,
+      -11,
+      11,
+      557,
+      557,
+      654,
+    }
+    max = []int{
+      1544,
+      888,
+      157875,
+      157875,
+      654,
+      654,
+    }
+  )
+  for i := range list {
+    if PickAny(func(a,b int)bool{return a>b}, list[i]...) != max[i] {
+      t.Error("PickAny (>) at", list[i], " is not at index",min[i])
+    }
+  }
+  for i := range list {
+    if PickAny(func(a,b int)bool{return a<b}, list[i]...) != min[i] {
+      t.Error("PickAny (<) at", list[i], " is not at index",min[i])
     }
   }
 }

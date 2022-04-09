@@ -135,3 +135,59 @@ func MinF[T helpful.Values](a, b T)T{
   }
   return b
 }
+
+func PickAny[T any](condition func(a,b T)bool, in ...T)T{
+  if len(in) > 2 {
+    var id = 0
+    for i := 1; i < len(in); i++ {
+      if condition(in[i], in[id]) {
+        id = i
+      }
+    }
+    return in[id]
+  }else{
+    if len(in) == 2 {
+      if condition(in[0],in[1]){
+        return in[0]
+      }else{
+        return in[1]
+      }
+    }else{
+      if len(in) == 1 {
+        return in[0]
+      }else{
+        var NulValue T
+        return NulValue
+      }
+    }
+  }
+  var NulValue T
+  return NulValue
+}
+
+func PickAnyId[T any](condition func(a,b T)bool, in ...T)int{
+  if len(in) > 2 {
+    var id = 0
+    for i := 1; i < len(in); i++ {
+      if condition(in[i], in[id]) {
+        id = i
+      }
+    }
+    return id
+  }else{
+    if len(in) == 2 {
+      if condition(in[0], in[1]) {
+        return 0
+      }else{
+        return 1
+      }
+    }else{
+      if len(in) == 1 {
+        return 0
+      }else{
+        return -1
+      }
+    }
+  }
+  return -1
+}
