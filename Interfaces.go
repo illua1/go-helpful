@@ -1,7 +1,7 @@
 package helpful
 
-import(
-  "golang.org/x/exp/constraints"
+import (
+	"golang.org/x/exp/constraints"
 )
 
 // Main helpful math type interface.
