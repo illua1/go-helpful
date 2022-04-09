@@ -1,4 +1,4 @@
-package helpful
+package helpful_slise
 
 import (
   "testing"
