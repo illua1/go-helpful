@@ -26,7 +26,7 @@ func BenchmarkSortAny(b *testing.B) {
   SortAny(list, func(a, b int)bool{return a > b})
 }
 
-func BenchmarkSortFloat(b *testing.B) {
+func BenchmarkSortAnyFloat(b *testing.B) {
   b.StopTimer()
   list := make([]float64, size)
   slise.Fill(list, func(index int)float64{return rand.Float64()})

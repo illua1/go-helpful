@@ -15,7 +15,7 @@ func TestJoin(t *testing.T) {
   }
 }
 
-func FillJoin(t *testing.T) {
+func TestFill(t *testing.T) {
   var(
     list []int = make([]int, 100)
   )
