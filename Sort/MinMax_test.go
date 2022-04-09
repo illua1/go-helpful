@@ -1,10 +1,11 @@
-package helpful
+package helpful_sort
 
 import(
   "testing"
+  "github.com/illua1/go-helpful"
 )
 
-type F_Test[T Values] struct{
+type F_Test[T helpful.Values] struct{
   a, b, c T
 }
 

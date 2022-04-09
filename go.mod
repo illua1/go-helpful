@@ -1,4 +1,4 @@
-module helpful
+module github.com/illua1/go-helpful
 
 go 1.18
 
