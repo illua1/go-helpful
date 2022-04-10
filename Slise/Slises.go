@@ -37,3 +37,23 @@ func Join[T any](slises ...[]T) (out []T) {
 	}
 	return
 }
+
+// CopyTo will fast filling slise by input value.
+func CopyTo[T any](slise []T, value T) {
+	l := len(slise)
+	if l < 3 {
+		for i := 0; i < l; i++ {
+			slise[i] = value
+		}
+		return
+	}
+	slise[0], slise[1] = value, value
+	size := 2
+	for {
+		copy(slise[size:], slise[:size])
+		size *= 2
+		if size >= l {
+			break
+		}
+	}
+}

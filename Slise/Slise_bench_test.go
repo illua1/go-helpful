@@ -2,11 +2,12 @@ package helpful_slise
 
 import(
   "testing"
+  "runtime"
 )
 
 const(
-  count = 1000
-  lengths = 100000
+  count = 100
+  lengths = 10000
 )
 
 func BenchmarkJoin(b *testing.B) {
@@ -16,6 +17,9 @@ func BenchmarkJoin(b *testing.B) {
   b.StartTimer()
   
   Join(list...)
+  
+  list = nil
+  runtime.GC()
 }
 
 func BenchmarkJoinSimpleAppend(b *testing.B) {
@@ -27,5 +31,24 @@ func BenchmarkJoinSimpleAppend(b *testing.B) {
   var unioned []int
   for i := range list {
     unioned = append(unioned, list[i]...)
+  }
+  
+  unioned = nil
+  runtime.GC()
+}
+
+func BenchmarkCopyToFast(b *testing.B) {
+  b.StopTimer()
+  list := make([]int, 1000000)
+  b.StartTimer()
+  CopyTo(list, 54)
+}
+
+func BenchmarkCopyToSimple(b *testing.B) {
+  b.StopTimer()
+  list := make([]int, 1000000)
+  b.StartTimer()
+  for i := 0; i < len(list); i++{
+    list[i] = 54
   }
 }

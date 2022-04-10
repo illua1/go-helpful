@@ -53,3 +53,22 @@ func TestCast(t *testing.T) {
     }
   }
 }
+
+func TestCopyTo(t *testing.T) {
+  
+  var(
+    list = make([]int, 100)
+    value = 415
+  )
+  CopyTo(list, value)
+  
+  if len(list) != 100 {
+    t.Error("CopyTo corrupt lenght")
+  }
+  
+  for i := range list {
+    if list[i] != value {
+      t.Error("CopyTo corrupted value at index :", i)
+    }
+  }
+}
