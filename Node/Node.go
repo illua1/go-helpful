@@ -134,3 +134,19 @@ func bNodeFull[T any](node *BNode[T], pointer *int, slise []T){
     bNodeFull[T](node.R, pointer, slise)
   }
 }
+
+func BNodeForTo[T any](node *BNode[T], method func(index int, contain T)){
+  pointer := 0
+  bNodeFull[T](node, &pointer, method)
+}
+
+func bNodeFor[T any](node *BNode[T], pointer *int, method func(index int, contain T)){
+  if node.L != nil {
+    bNodeFor[T](node.L, pointer, method)
+  }
+  method(*pointer, node.Contain)
+  *pointer += 1
+  if node.R != nil {
+    bNodeFor[T](node.R, pointer, method)
+  }
+}
