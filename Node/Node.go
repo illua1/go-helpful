@@ -137,7 +137,7 @@ func bNodeFull[T any](node *BNode[T], pointer *int, slise []T){
 
 func BNodeForTo[T any](node *BNode[T], method func(index int, contain T)){
   pointer := 0
-  bNodeFull[T](node, &pointer, method)
+  bNodeFor[T](node, &pointer, method)
 }
 
 func bNodeFor[T any](node *BNode[T], pointer *int, method func(index int, contain T)){
