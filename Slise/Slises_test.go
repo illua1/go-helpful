@@ -72,3 +72,34 @@ func TestCopyTo(t *testing.T) {
     }
   }
 }
+
+func TestGetLast(t *testing.T) {
+  
+  var(
+    list = []int{1,2,3,4,5,6,7,8,9}
+    last = 9
+  )
+  
+  if v, _ := GetLast(list, 14); v != last {
+    t.Error("GetLast corrupt last at index: ", 14)
+  }
+  
+  if v, _ := GetLast(list, 5); v  != list[5] {
+    t.Error("GetLast corrupt last at index: ", 5)
+  }
+}
+
+func TestGetFirst(t *testing.T) {
+  var(
+    list = []int{1,2,3,4,5,6,7,8,9}
+    first = 1
+  )
+  
+  if v, _ := GetFirst(list, -14); v != first {
+    t.Error("GetFirst corrupt last at index: ", -14)
+  }
+  
+  if v, _ := GetLast(list, 7); v  != list[7] {
+    t.Error("GetFirst corrupt last at index: ", 7)
+  }
+}

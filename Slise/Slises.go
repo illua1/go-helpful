@@ -57,3 +57,29 @@ func CopyTo[T any](slise []T, value T) {
 		}
 	}
 }
+
+func GetLast[T any](in []T, index int)(T, bool){
+  if len(in) > 0 {
+    if (len(in) > index) && (index >= 0) {
+      return in[index], true
+    } else {
+      return in[len(in)-1], true
+    }
+  } else {
+    var v T
+    return v, false 
+  }
+}
+
+func GetFirst[T any](in []T, index int)(T, bool){
+  if len(in) > 0 {
+    if (len(in) > index) && (index >= 0) {
+      return in[index], true
+    } else {
+      return in[0], true
+    }
+  } else {
+    var v T
+    return v, false 
+  }
+}
