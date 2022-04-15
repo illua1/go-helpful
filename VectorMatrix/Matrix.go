@@ -270,6 +270,19 @@ func (matrix *Matrix[Value, Row, Column]) FillTo(in func(x, y int, value Value))
 	return
 }
 
+func (matrix *Matrix[Value, Row, Column])MulVector(a Vector[Value, Row])Vector[Value, Row]{
+	if len(matrix.A) != len(matrix.A[0]) {
+		return Vector[Value, Row]{}
+	}
+  var ret Vector[Value, Row]
+	for i := 0; i < len(matrix.A); i++ {
+		for x := 0; x < len(matrix.A[0]); x++ {
+			ret.A[i] += a.A[i] * matrix.A[x][i]
+		}
+	}
+  return ret
+}
+
 /*
 func(matrix *Matrix[Value, Row, Column])Determinant()Value{
   if len(matrix.A) != len(matrix.A[0]) {
