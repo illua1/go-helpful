@@ -2,8 +2,8 @@ package helpful_vector_matrix
 
 import (
 	"fmt"
-	"image"
 	value "github.com/illua1/go-helpful"
+	"image"
 )
 
 type matrixSlise[Value value.Values] struct {
@@ -59,7 +59,7 @@ func (matrix_slise *matrixSlise[Value]) Size() (x, y int) {
 
 func (matrix_slise *matrixSlise[Value]) Minor(x_, y_ int) Matrix_Main_Functions[Value] {
 	size_x, size_y := matrix_slise.Size()
-  var ret MatrixMutable[Value] = matrix_slise.Slise(0, 0, size_x-1, size_y-1).Mutable()
+	var ret MatrixMutable[Value] = matrix_slise.Slise(0, 0, size_x-1, size_y-1).Mutable()
 	if (0 <= x_) && (x_ < size_x) {
 		if (0 <= y_) && (y_ < size_y) {
 			for x := 0; x < x_; x++ {
@@ -80,7 +80,7 @@ func (matrix_slise *matrixSlise[Value]) Minor(x_, y_ int) Matrix_Main_Functions[
 			}
 		}
 	}
-  return &ret
+	return &ret
 }
 
 func (matrix_slise *matrixSlise[Value]) Body() []Value {
@@ -106,27 +106,27 @@ func (matrix_slise *matrixSlise[Value]) Fill(value Value) {
 func (matrix_slise *matrixSlise[Value]) Scale(size Value) {
 	for x := matrix_slise.bound.Min.X; x < matrix_slise.bound.Max.X; x++ {
 		for y := matrix_slise.bound.Min.Y; y < matrix_slise.bound.Max.Y; y++ {
-			matrix_slise.src.Set(x, y, matrix_slise.src.Get(x, y) * size)
+			matrix_slise.src.Set(x, y, matrix_slise.src.Get(x, y)*size)
 		}
 	}
 }
 
 func (matrix_slise *matrixSlise[Value]) Mutable() MatrixMutable[Value] {
-  var m = MatrixMutableNew[Value](matrix_slise.Size())
+	var m = MatrixMutableNew[Value](matrix_slise.Size())
 	for x := matrix_slise.bound.Min.X; x < matrix_slise.bound.Max.X; x++ {
-    var pointer_x int
+		var pointer_x int
 		for y := matrix_slise.bound.Min.Y; y < matrix_slise.bound.Max.Y; y++ {
-      var pointer_y int
+			var pointer_y int
 			m.Set(pointer_x, pointer_y, matrix_slise.Get(x, y))
 			pointer_y++
 		}
-    pointer_x++
+		pointer_x++
 	}
-  return m
+	return m
 }
 
-func(matrix_slise *matrixSlise[Value])FillAs(values func(x, y int)Value) {
-  x_, y_ := matrix_slise.Size()
+func (matrix_slise *matrixSlise[Value]) FillAs(values func(x, y int) Value) {
+	x_, y_ := matrix_slise.Size()
 	for x := 0; x < x_; x++ {
 		for y := 0; y < y_; y++ {
 			matrix_slise.Set(x, y, values(x, y))
@@ -135,8 +135,8 @@ func(matrix_slise *matrixSlise[Value])FillAs(values func(x, y int)Value) {
 	return
 }
 
-func(matrix_slise *matrixSlise[Value])FillTo(in func(x, y int, value Value)) {
-  x_, y_ := matrix_slise.Size()
+func (matrix_slise *matrixSlise[Value]) FillTo(in func(x, y int, value Value)) {
+	x_, y_ := matrix_slise.Size()
 	for x := 0; x < x_; x++ {
 		for y := 0; y < y_; y++ {
 			in(x, y, matrix_slise.Get(x, y))

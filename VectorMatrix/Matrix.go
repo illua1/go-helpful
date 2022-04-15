@@ -2,8 +2,8 @@ package helpful_vector_matrix
 
 import (
 	"fmt"
-	"image"
 	value "github.com/illua1/go-helpful"
+	"image"
 )
 
 /*
@@ -252,7 +252,7 @@ func (matrix *Matrix[Value, Row, Column]) Transposed() (C Matrix[Value, Row, Col
 	return
 }
 
-func(matrix *Matrix[Value, Row, Column])FillAs(values func(x, y int)Value) {
+func (matrix *Matrix[Value, Row, Column]) FillAs(values func(x, y int) Value) {
 	for x := 0; x < len(matrix.A); x++ {
 		for y := 0; y < len(matrix.A[0]); y++ {
 			matrix.A[x][y] = values(x, y)
@@ -261,7 +261,7 @@ func(matrix *Matrix[Value, Row, Column])FillAs(values func(x, y int)Value) {
 	return
 }
 
-func(matrix *Matrix[Value, Row, Column])FillTo(in func(x, y int, value Value)) {
+func (matrix *Matrix[Value, Row, Column]) FillTo(in func(x, y int, value Value)) {
 	for x := 0; x < len(matrix.A); x++ {
 		for y := 0; y < len(matrix.A[0]); y++ {
 			in(x, y, matrix.A[x][y])

@@ -203,45 +203,45 @@ func TestMatrixMinorMutable(t *testing.T) {
 			[3]int{3, 6, 9},
 		},
 	}
-  m := m_.Mutable()
+	m := m_.Mutable()
 	m1_ := Matrix[int, [2]int, [2][2]int]{
 		[2][2]int{
 			[2]int{5, 8},
 			[2]int{6, 9},
 		},
 	}
-  m1 := m1_.Mutable()
+	m1 := m1_.Mutable()
 	m2_ := Matrix[int, [2]int, [2][2]int]{
 		[2][2]int{
 			[2]int{1, 7},
 			[2]int{3, 9},
 		},
 	}
-  m2 := m2_.Mutable()
+	m2 := m2_.Mutable()
 	m3_ := Matrix[int, [2]int, [2][2]int]{
 		[2][2]int{
 			[2]int{1, 4},
 			[2]int{2, 5},
 		},
 	}
-  m3 := m3_.Mutable()
+	m3 := m3_.Mutable()
 	m4_ := Matrix[int, [2]int, [2][2]int]{
 		[2][2]int{
 			[2]int{4, 7},
 			[2]int{5, 8},
 		},
 	}
-  m4 := m4_.Mutable()
+	m4 := m4_.Mutable()
 	if !compare.Compare(m.Minor(0, 0).Body(), m1.Body()) {
-		t.Error(m.Body(), m1.Body(), m.Minor(0, 0).Body(), "> ",0, 0)
+		t.Error(m.Body(), m1.Body(), m.Minor(0, 0).Body(), "> ", 0, 0)
 	}
 	if !compare.Compare(m.Minor(1, 1).Body(), m2.Body()) {
-		t.Error(m.Body(), m2.Body(), m.Minor(1, 1).Body(), "> ",1, 1)
+		t.Error(m.Body(), m2.Body(), m.Minor(1, 1).Body(), "> ", 1, 1)
 	}
 	if !compare.Compare(m.Minor(2, 2).Body(), m3.Body()) {
-		t.Error(m.Body(), m3.Body(), m.Minor(2, 2).Body(), "> ",2, 0)
+		t.Error(m.Body(), m3.Body(), m.Minor(2, 2).Body(), "> ", 2, 0)
 	}
 	if !compare.Compare(m.Minor(2, 0).Body(), m4.Body()) {
-		t.Error(m.Body(), m4.Body(), m.Minor(2, 0).Body(), "> ",2, 0)
+		t.Error(m.Body(), m4.Body(), m.Minor(2, 0).Body(), "> ", 2, 0)
 	}
 }

@@ -1,17 +1,15 @@
 package helpful_vector_matrix
 
 import (
-  "fmt"
-	"image"
+	"fmt"
 	value "github.com/illua1/go-helpful"
+	"image"
 )
 
-
 type Matrix_Main_Functions[Value value.Values] interface {
-	
-  String()string
-  
-  Get(x, y int) Value
+	String() string
+
+	Get(x, y int) Value
 	Set(s, y int, value Value)
 
 	Bound() image.Rectangle
@@ -19,32 +17,32 @@ type Matrix_Main_Functions[Value value.Values] interface {
 	Body() []Value
 
 	Slise(min_x, min_y, max_x, max_y int) Matrix_Main_Functions[Value]
-  Mutable()MatrixMutable[Value]
-	
-  Fill(value Value)
-  FillTo(in func(x, y int, value Value))
-  FillAs(values func(x, y int)Value)
-  
-  Scale(size Value)
+	Mutable() MatrixMutable[Value]
+
+	Fill(value Value)
+	FillTo(in func(x, y int, value Value))
+	FillAs(values func(x, y int) Value)
+
+	Scale(size Value)
 
 	Minor(x, y int) Matrix_Main_Functions[Value]
 }
 
 func init() {
-  var a Matrix_Main_Functions[int]
-  {
-    a_l := Matrix2x2[int]()
-    a = &a_l
-  }
-  {
-    a_f := Matrix2x2[int]()
-    a = a_f.Slise(0, 0, 2, 2)
-  }
-  {
-    a_f := Matrix2x2[int]()
-    a_l := a_f.Mutable()
-    a = &a_l
-  }
+	var a Matrix_Main_Functions[int]
+	{
+		a_l := Matrix2x2[int]()
+		a = &a_l
+	}
+	{
+		a_f := Matrix2x2[int]()
+		a = a_f.Slise(0, 0, 2, 2)
+	}
+	{
+		a_f := Matrix2x2[int]()
+		a_l := a_f.Mutable()
+		a = &a_l
+	}
 
 	if false {
 		fmt.Println(a)
@@ -52,9 +50,8 @@ func init() {
 }
 
 type MatrixOperations[Value value.Values, Row value.Arrays[Value], Column value.Arrays[Row]] interface {
-  Matrix[Value, Row, Column] | matrixSlise[Value] | MatrixMutable[Value]
+	Matrix[Value, Row, Column] | matrixSlise[Value] | MatrixMutable[Value]
 }
-
 
 func MatrixEqualSize[Value_a value.Values, Value_b value.Values](
 	matrix_a Matrix_Main_Functions[Value_a],
