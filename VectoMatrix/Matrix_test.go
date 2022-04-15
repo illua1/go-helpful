@@ -40,13 +40,13 @@ func TestNewMatrix(t *testing.T) {
 		m := Matrix5x5[int]()
 		{
 			ms := matrixMax.Slise(0, 0, 5, 5)
-			if !MatrixIsEqual[int, int](ms, m) {
+			if !MatrixIsEqual[int, int](ms, &m) {
 				t.Error("Matrix5x5 corrupted\n", ms, "\n", m)
 			}
 		}
 		{
 			ms := matrixMax.Slise(0, 1, 5, 6)
-			if MatrixIsEqual[int, int](ms, m) {
+			if MatrixIsEqual[int, int](ms, &m) {
 				t.Error("Matrix5x5 corrupted\n", ms, "\n", m)
 			}
 		}
@@ -55,13 +55,13 @@ func TestNewMatrix(t *testing.T) {
 		m := Matrix4x4[int]()
 		{
 			ms := matrixMax.Slise(0, 0, 4, 4)
-			if !MatrixIsEqual[int, int](ms, m) {
+			if !MatrixIsEqual[int, int](ms, &m) {
 				t.Error("Matrix4x4 corrupted\n", ms, "\n", m)
 			}
 		}
 		{
 			ms := matrixMax.Slise(0, 1, 4, 5)
-			if MatrixIsEqual[int, int](ms, m) {
+			if MatrixIsEqual[int, int](ms, &m) {
 				t.Error("Matrix4x4 corrupted\n", ms, "\n", m)
 			}
 		}
@@ -70,13 +70,13 @@ func TestNewMatrix(t *testing.T) {
 		m := Matrix3x3[int]()
 		{
 			ms := matrixMax.Slise(0, 0, 3, 3)
-			if !MatrixIsEqual[int, int](ms, m) {
+			if !MatrixIsEqual[int, int](ms, &m) {
 				t.Error("Matrix3x3 corrupted\n", ms, "\n", m)
 			}
 		}
 		{
 			ms := matrixMax.Slise(0, 1, 3, 4)
-			if MatrixIsEqual[int, int](ms, m) {
+			if MatrixIsEqual[int, int](ms, &m) {
 				t.Error("Matrix3x3 corrupted\n", ms, "\n", m)
 			}
 		}
@@ -85,13 +85,13 @@ func TestNewMatrix(t *testing.T) {
 		m := Matrix2x2[int]()
 		{
 			ms := matrixMax.Slise(0, 0, 2, 2)
-			if !MatrixIsEqual[int, int](ms, m) {
+			if !MatrixIsEqual[int, int](ms, &m) {
 				t.Error("Matrix2x2 corrupted\n", ms, "\n", m)
 			}
 		}
 		{
 			ms := matrixMax.Slise(0, 1, 2, 3)
-			if MatrixIsEqual[int, int](ms, m) {
+			if MatrixIsEqual[int, int](ms, &m) {
 				t.Error("Matrix2x2 corrupted\n", ms, "\n", m)
 			}
 		}
@@ -181,62 +181,67 @@ func TestMatrixMinor(t *testing.T) {
 			[3]int{0, 0, 0},
 		},
 	}
-	if m.Minor(0, 0).(Matrix[int, [3]int, [3][3]int]) != m1 {
+	if *(m.Minor(0, 0).(*Matrix[int, [3]int, [3][3]int])) != m1 {
 		t.Error(m, m1, m.Minor(0, 0), 0, 0)
 	}
-	if m.Minor(1, 1).(Matrix[int, [3]int, [3][3]int]) != m2 {
+	if *(m.Minor(1, 1).(*Matrix[int, [3]int, [3][3]int])) != m2 {
 		t.Error(m, m2, m.Minor(1, 1), 1, 1)
 	}
-	if m.Minor(2, 2).(Matrix[int, [3]int, [3][3]int]) != m3 {
+	if *(m.Minor(2, 2).(*Matrix[int, [3]int, [3][3]int])) != m3 {
 		t.Error(m, m3, m.Minor(2, 2), 2, 0)
 	}
-	if m.Minor(2, 0).(Matrix[int, [3]int, [3][3]int]) != m4 {
+	if *(m.Minor(2, 0).(*Matrix[int, [3]int, [3][3]int])) != m4 {
 		t.Error(m, m4, m.Minor(2, 0), 2, 0)
 	}
 }
 
 func TestMatrixMinorMutable(t *testing.T) {
-	m := Matrix[int, [3]int, [3][3]int]{
+	m_ := Matrix[int, [3]int, [3][3]int]{
 		[3][3]int{
 			[3]int{1, 4, 7},
 			[3]int{2, 5, 8},
 			[3]int{3, 6, 9},
 		},
-	}.Mutable()
-	m1 := Matrix[int, [2]int, [2][2]int]{
+	}
+  m := m_.Mutable()
+	m1_ := Matrix[int, [2]int, [2][2]int]{
 		[2][2]int{
 			[2]int{5, 8},
 			[2]int{6, 9},
 		},
-	}.Mutable()
-	m2 := Matrix[int, [2]int, [2][2]int]{
+	}
+  m1 := m1_.Mutable()
+	m2_ := Matrix[int, [2]int, [2][2]int]{
 		[2][2]int{
 			[2]int{1, 7},
 			[2]int{3, 9},
 		},
-	}.Mutable()
-	m3 := Matrix[int, [2]int, [2][2]int]{
+	}
+  m2 := m2_.Mutable()
+	m3_ := Matrix[int, [2]int, [2][2]int]{
 		[2][2]int{
 			[2]int{1, 4},
 			[2]int{2, 5},
 		},
-	}.Mutable()
-	m4 := Matrix[int, [2]int, [2][2]int]{
+	}
+  m3 := m3_.Mutable()
+	m4_ := Matrix[int, [2]int, [2][2]int]{
 		[2][2]int{
 			[2]int{4, 7},
 			[2]int{5, 8},
 		},
-	}.Mutable()
+	}
+  m4 := m4_.Mutable()
 	if !compare.Compare(m.Minor(0, 0).Body(), m1.Body()) {
-		t.Error(m.Body(), m1.Body(), m.Minor(0, 0).Body(), 0, 0)
+		t.Error(m.Body(), m1.Body(), m.Minor(0, 0).Body(), "> ",0, 0)
 	}
 	if !compare.Compare(m.Minor(1, 1).Body(), m2.Body()) {
-		t.Error(m.Body(), m2.Body(), m.Minor(1, 1).Body(), 1, 1)
+		t.Error(m.Body(), m2.Body(), m.Minor(1, 1).Body(), "> ",1, 1)
 	}
 	if !compare.Compare(m.Minor(2, 2).Body(), m3.Body()) {
-		t.Error(m.Body(), m3.Body(), m.Minor(2, 2).Body(), 2, 0)
+		t.Error(m.Body(), m3.Body(), m.Minor(2, 2).Body(), "> ",2, 0)
 	}
 	if !compare.Compare(m.Minor(2, 0).Body(), m4.Body()) {
-		t.Error(m.Body(), m4.Body(), m.Minor(2, 0).Body(), 2, 0)
+		t.Error(m.Body(), m4.Body(), m.Minor(2, 0).Body(), "> ",2, 0)
 	}
 }
