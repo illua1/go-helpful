@@ -261,6 +261,15 @@ func(matrix *Matrix[Value, Row, Column])FillAs(values func(x, y int)Value) {
 	return
 }
 
+func(matrix *Matrix[Value, Row, Column])FillTo(in func(x, y int, value Value)) {
+	for x := 0; x < len(matrix.A); x++ {
+		for y := 0; y < len(matrix.A[0]); y++ {
+			in(x, y, matrix.A[x][y])
+		}
+	}
+	return
+}
+
 /*
 func(matrix *Matrix[Value, Row, Column])Determinant()Value{
   if len(matrix.A) != len(matrix.A[0]) {

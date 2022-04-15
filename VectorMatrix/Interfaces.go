@@ -22,8 +22,10 @@ type Matrix_Main_Functions[Value value.Values] interface {
   Mutable()MatrixMutable[Value]
 	
   Fill(value Value)
-  Scale(size Value)
+  FillTo(in func(x, y int, value Value))
   FillAs(values func(x, y int)Value)
+  
+  Scale(size Value)
 
 	Minor(x, y int) Matrix_Main_Functions[Value]
 }
@@ -44,7 +46,7 @@ func init() {
     a = &a_l
   }
 
-	if a != nil {
+	if false {
 		fmt.Println(a)
 	}
 }

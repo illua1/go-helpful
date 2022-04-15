@@ -125,3 +125,12 @@ func(matrix_mutable *MatrixMutable[Value])FillAs(values func(x, y int)Value) {
 	}
 	return
 }
+
+func(matrix_mutable *MatrixMutable[Value])FillTo(in func(x, y int, value Value)) {
+	for x := 0; x < int(matrix_mutable.size_x); x++ {
+		for y := 0; y < int(matrix_mutable.size_y); y++ {
+			in(x, y, matrix_mutable.Get(x, y))
+		}
+	}
+	return
+}

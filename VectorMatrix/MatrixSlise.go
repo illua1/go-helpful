@@ -134,3 +134,13 @@ func(matrix_slise *matrixSlise[Value])FillAs(values func(x, y int)Value) {
 	}
 	return
 }
+
+func(matrix_slise *matrixSlise[Value])FillTo(in func(x, y int, value Value)) {
+  x_, y_ := matrix_slise.Size()
+	for x := 0; x < x_; x++ {
+		for y := 0; y < y_; y++ {
+			in(x, y, matrix_slise.Get(x, y))
+		}
+	}
+	return
+}
