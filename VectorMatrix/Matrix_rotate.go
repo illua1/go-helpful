@@ -10,27 +10,63 @@ import (
 */
 
 func Rotate3x3_XYZ[Value value.Values, Angle value.Values](angle [3]Angle) Matrix[Value, [3]Value, [3][3]Value] {
-	return Matrix3x3[Value]().Mull(Rotate3x3_x[Value](angle[0])).Mull(Rotate3x3_y[Value](angle[1])).Mull(Rotate3x3_z[Value](angle[2]))
+	return Matrix3x3[Value]().Mull(
+    Rotate3x3_x[Value](angle[0]),
+  ).Mull(
+    Rotate3x3_y[Value](angle[1]),
+  ).Mull(
+    Rotate3x3_z[Value](angle[2]),
+  )
 }
 
 func Rotate3x3_XZY[Value value.Values, Angle value.Values](angle [3]Angle) Matrix[Value, [3]Value, [3][3]Value] {
-	return Matrix3x3[Value]().Mull(Rotate3x3_x[Value](angle[0])).Mull(Rotate3x3_y[Value](angle[2])).Mull(Rotate3x3_z[Value](angle[1]))
+	return Matrix3x3[Value]().Mull(
+    Rotate3x3_x[Value](angle[0]),
+  ).Mull(
+    Rotate3x3_z[Value](angle[2]),
+  ).Mull(
+    Rotate3x3_y[Value](angle[1]),
+  )
 }
 
 func Rotate3x3_YZX[Value value.Values, Angle value.Values](angle [3]Angle) Matrix[Value, [3]Value, [3][3]Value] {
-	return Matrix3x3[Value]().Mull(Rotate3x3_x[Value](angle[1])).Mull(Rotate3x3_y[Value](angle[2])).Mull(Rotate3x3_z[Value](angle[0]))
+	return Matrix3x3[Value]().Mull(
+    Rotate3x3_y[Value](angle[1]),
+  ).Mull(
+    Rotate3x3_z[Value](angle[2]),
+  ).Mull(
+    Rotate3x3_x[Value](angle[0]),
+  )
 }
 
 func Rotate3x3_YXZ[Value value.Values, Angle value.Values](angle [3]Angle) Matrix[Value, [3]Value, [3][3]Value] {
-	return Matrix3x3[Value]().Mull(Rotate3x3_x[Value](angle[1])).Mull(Rotate3x3_y[Value](angle[0])).Mull(Rotate3x3_z[Value](angle[2]))
+	return Matrix3x3[Value]().Mull(
+    Rotate3x3_y[Value](angle[1]),
+  ).Mull(
+    Rotate3x3_x[Value](angle[0]),
+  ).Mull(
+    Rotate3x3_z[Value](angle[2]),
+  )
 }
 
 func Rotate3x3_ZYX[Value value.Values, Angle value.Values](angle [3]Angle) Matrix[Value, [3]Value, [3][3]Value] {
-	return Matrix3x3[Value]().Mull(Rotate3x3_x[Value](angle[2])).Mull(Rotate3x3_y[Value](angle[1])).Mull(Rotate3x3_z[Value](angle[0]))
+	return Matrix3x3[Value]().Mull(
+    Rotate3x3_z[Value](angle[2]),
+  ).Mull(
+    Rotate3x3_y[Value](angle[1]),
+  ).Mull(
+    Rotate3x3_x[Value](angle[0]),
+  )
 }
 
 func Rotate3x3_ZXY[Value value.Values, Angle value.Values](angle [3]Angle) Matrix[Value, [3]Value, [3][3]Value] {
-	return Matrix3x3[Value]().Mull(Rotate3x3_x[Value](angle[2])).Mull(Rotate3x3_y[Value](angle[0])).Mull(Rotate3x3_z[Value](angle[1]))
+	return Matrix3x3[Value]().Mull(
+    Rotate3x3_z[Value](angle[2]),
+  ).Mull(
+    Rotate3x3_x[Value](angle[0]),
+  ).Mull(
+    Rotate3x3_y[Value](angle[1]),
+  )
 }
 
 /*
