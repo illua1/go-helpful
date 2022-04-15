@@ -223,7 +223,7 @@ func (matrix *Matrix[Value, Row, Column]) Mutable() (ret MatrixMutable[Value]) {
 
 */
 
-func (matrix *Matrix[Value, Row, Column]) Mull(B Matrix[Value, Row, Column]) (C Matrix[Value, Row, Column]) {
+func (matrix Matrix[Value, Row, Column]) Mull(B Matrix[Value, Row, Column]) (C Matrix[Value, Row, Column]) {
 	var len_ int
 	if len(matrix.A) > len(matrix.A[0]) {
 		len_ = len(matrix.A[0])
