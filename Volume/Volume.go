@@ -176,10 +176,10 @@ func (b Boxe[Value]) Points() [8]Point[Value] {
 		Point[Value]{b.Min.X, b.Min.Y, b.Max.Z},
 		Point[Value]{b.Min.X, b.Max.Y, b.Min.Z},
 		Point[Value]{b.Min.X, b.Max.Y, b.Max.Z},
-		b.Max,
-		Point[Value]{b.Max.X, b.Max.Y, b.Min.Z},
+		Point[Value]{b.Max.X, b.Min.Y, b.Min.Z},
 		Point[Value]{b.Max.X, b.Min.Y, b.Max.Z},
-		Point[Value]{b.Max.X, b.Max.Y, b.Max.Z},
+		Point[Value]{b.Max.X, b.Max.Y, b.Min.Z},
+		b.Max,
 	}
 }
 
