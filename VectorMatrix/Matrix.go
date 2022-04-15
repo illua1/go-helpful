@@ -277,7 +277,7 @@ func (matrix *Matrix[Value, Row, Column])MulVector(a Vector[Value, Row])Vector[V
   var ret Vector[Value, Row]
 	for i := 0; i < len(matrix.A); i++ {
 		for x := 0; x < len(matrix.A[0]); x++ {
-			ret.A[i] += a.A[i] * matrix.A[x][i]
+			ret.A[i] += a.A[x] * matrix.A[x][i]
 		}
 	}
   return ret
