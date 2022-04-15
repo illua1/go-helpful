@@ -170,6 +170,10 @@ func (b Boxe[Value]) Canon() Boxe[Value] {
 	return b
 }
 
+func (b Boxe[Value]) Centre() Point[Value] {
+  return b.Min.Add(b.Max).Div(2)
+}
+
 func (b Boxe[Value]) Points() [8]Point[Value] {
 	return [8]Point[Value]{
 		b.Min,
@@ -181,6 +185,18 @@ func (b Boxe[Value]) Points() [8]Point[Value] {
 		Point[Value]{b.Max.X, b.Max.Y, b.Min.Z},
 		b.Max,
 	}
+}
+
+func (b Boxe[Value]) FaceCentres() [6]Point[Value]{
+  centre := b.Centre()
+  return [6]Point[Value]{
+    Point[Value]{centre.X, centre.Y, b.Min.Z},
+    Point[Value]{centre.X, centre.Y, b.Max.Z},
+    Point[Value]{centre.X, b.Min.Y, centre.Z},
+    Point[Value]{centre.X, b.Min.Y, centre.Z},
+    Point[Value]{b.Min.X, centre.Y, centre.Z},
+    Point[Value]{b.Min.X, centre.Y, centre.Z},
+  }
 }
 
 func (b Boxe[Value]) Edges() [12][2]int {
@@ -221,7 +237,7 @@ func (b Boxe[Value]) FacePoints() [6][4]int {
 		[4]int{3, 0, 7, 4},
 	}
 }
-
+/*
 func (b Boxe[Value]) FaceCentres() (ret [6]Point[Value]){
 	points := b.Points()
   f_indeces := b.FacePoints()
@@ -233,3 +249,4 @@ func (b Boxe[Value]) FaceCentres() (ret [6]Point[Value]){
   }
   return
 }
+*/
