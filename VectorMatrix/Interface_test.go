@@ -1,9 +1,8 @@
 package helpful_vector_matrix
 
 import (
-	"math/rand"
-	//"image"
 	value "github.com/illua1/go-helpful"
+	"math/rand"
 	"testing"
 )
 
@@ -57,5 +56,23 @@ func TestMatrixInterfaces(t *testing.T) {
 			t,
 			texts[i],
 		)
+	}
+}
+func TestMatrixDeterminant(t *testing.T) {
+	var (
+		a   = Matrix6x6[int]()
+		b_p = Matrix6x6[int]()
+		b   = (&b_p).Slise(0, 0, 6, 6)
+		c   = a.Mutable()
+	)
+	contain := Matrix6x6[int]()
+	contain.FillAs(func(x, y int) int {
+		return rand.Intn(100)
+	})
+	MatrixWrite[int, int](&a, &contain)
+	MatrixWrite[int, int](b, &contain)
+	MatrixWrite[int, int](&c, &contain)
+	if (a.Determinant() != b.Determinant()) || (a.Determinant() != c.Determinant()) {
+		t.Error("Corrupted determinant :\n", &a, "\n :", a.Determinant(), "\n", b, "\n :", b.Determinant(), "\n", &c, "\n :", c.Determinant())
 	}
 }

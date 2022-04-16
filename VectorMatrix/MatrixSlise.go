@@ -113,15 +113,7 @@ func (matrix_slise *matrixSlise[Value]) Scale(size Value) {
 
 func (matrix_slise *matrixSlise[Value]) Mutable() MatrixMutable[Value] {
 	var m = MatrixMutableNew[Value](matrix_slise.Size())
-	for x := matrix_slise.bound.Min.X; x < matrix_slise.bound.Max.X; x++ {
-		var pointer_x int
-		for y := matrix_slise.bound.Min.Y; y < matrix_slise.bound.Max.Y; y++ {
-			var pointer_y int
-			m.Set(pointer_x, pointer_y, matrix_slise.Get(x, y))
-			pointer_y++
-		}
-		pointer_x++
-	}
+	matrix_slise.FillTo(m.Set)
 	return m
 }
 
@@ -143,4 +135,12 @@ func (matrix_slise *matrixSlise[Value]) FillTo(in func(x, y int, value Value)) {
 		}
 	}
 	return
+}
+
+func (matrix_slise *matrixSlise[Value]) Determinant() Value {
+	if x, y := matrix_slise.Size(); x != y {
+		return 0
+	}
+	var mutable = matrix_slise.Mutable()
+	return (&mutable).Determinant()
 }

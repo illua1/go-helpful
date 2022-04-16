@@ -134,3 +134,25 @@ func (matrix_mutable *MatrixMutable[Value]) FillTo(in func(x, y int, value Value
 	}
 	return
 }
+
+func (matrix_mutable *MatrixMutable[Value]) Determinant() Value {
+	x_, y_ := matrix_mutable.Size()
+	if x_ != y_ {
+		return 0
+	}
+	if x_ > 2 {
+		var ret Value
+		for x := 0; x < x_; x++ {
+			ret += Value(1-(x%2)*2) * matrix_mutable.Minor(x, 0).Determinant() * matrix_mutable.Get(x, 0)
+		}
+		return ret
+	}
+	if x_ == 1 {
+		return matrix_mutable.Get(0, 0)
+	}
+	if x_ == 0 {
+		var v Value
+		return v
+	}
+	return matrix_mutable.Get(0, 0)*matrix_mutable.Get(1, 1) - matrix_mutable.Get(0, 1)*matrix_mutable.Get(1, 0)
+}

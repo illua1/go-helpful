@@ -1,11 +1,9 @@
 package helpful_vector_matrix
 
 import (
-	//"math"
-	//"image"
-	"testing"
-	//value "github.com/illua1/go-helpful"
 	compare "github.com/illua1/go-helpful/Compare"
+	"math/rand"
+	"testing"
 )
 
 /*
@@ -244,4 +242,27 @@ func TestMatrixMinorMutable(t *testing.T) {
 	if !compare.Compare(m.Minor(2, 0).Body(), m4.Body()) {
 		t.Error(m.Body(), m4.Body(), m.Minor(2, 0).Body(), "> ", 2, 0)
 	}
+}
+
+func TestMatrixInvert(t *testing.T) {
+	var m = Matrix4x4[float64]()
+	m.FillAs(func(x, y int) float64 {
+		return float64(rand.Intn(10) + 1)
+	})
+	var m2 = m.Invert()
+
+	var m_t1 = Matrix4x4[float64]()
+	var m_t2 = m2.Mull(m)
+
+	var m_int_t1 = Matrix4x4[int]()
+	var m_int_t2 = Matrix4x4[int]()
+
+	// For mor correct compration
+	MatrixWrite[int, float64](&m_int_t1, &m_t1)
+	MatrixWrite[int, float64](&m_int_t2, &m_t2)
+
+	if !MatrixIsEqual[int, int](&m_int_t1, &m_int_t2) {
+		t.Error("Matrix corrupt invert: \n", m, "\n", m2, "\n\n", m_t1, "\n", m_t2)
+	}
+
 }

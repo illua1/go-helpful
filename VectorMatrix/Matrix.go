@@ -270,36 +270,44 @@ func (matrix *Matrix[Value, Row, Column]) FillTo(in func(x, y int, value Value))
 	return
 }
 
-func (matrix *Matrix[Value, Row, Column])MulVector(a Vector[Value, Row])Vector[Value, Row]{
+func (matrix *Matrix[Value, Row, Column]) MulVector(a Vector[Value, Row]) Vector[Value, Row] {
 	if len(matrix.A) != len(matrix.A[0]) {
 		return Vector[Value, Row]{}
 	}
-  var ret Vector[Value, Row]
+	var ret Vector[Value, Row]
 	for i := 0; i < len(matrix.A); i++ {
 		for x := 0; x < len(matrix.A[0]); x++ {
 			ret.A[i] += a.A[x] * matrix.A[i][x]
 		}
 	}
-  return ret
+	return ret
 }
 
-/*
-func(matrix *Matrix[Value, Row, Column])Determinant()Value{
-  if len(matrix.A) != len(matrix.A[0]) {
-    var v Value
-    return v
-  }
-  if len(matrix.A) == 2 {
-    var i = 1
-    return matrix.A[0][0] * matrix.A[i][i] - matrix.A[0][i] * matrix.A[i][0]
-  }else{
-    //var buffer Matrix[Value, Row, Column]
-    //for diagonal  := 0; diagonal < len(matrix.A)-2; diagonal++ {
-      //for x_main := 0; x_main < len(matrix.A); x_main++ {
-        //buffer = matrix.Minor(x_main, 0)
-
-      //}
-    //}
-  }
+func (matrix *Matrix[Value, Row, Column]) Determinant() Value {
+	if len(matrix.A) != len(matrix.A[0]) {
+		return 0
+	}
+	if len(matrix.A) > 1 {
+		var mutable = matrix.Mutable()
+		return (&mutable).Determinant()
+	}
+	return matrix.A[0][0]
 }
-*/
+
+func (matrix Matrix[Value, Row, Column]) Invert() Matrix[Value, Row, Column] {
+	if len(matrix.A) != len(matrix.A[0]) {
+		return Matrix[Value, Row, Column]{}
+	}
+	var ret Matrix[Value, Row, Column]
+	var mutable = matrix.Mutable()
+	var determinamnt = matrix.Determinant()
+	if determinamnt == 0 {
+		return Matrix[Value, Row, Column]{}
+	}
+	for x := 0; x < len(ret.A); x++ {
+		for y := 0; y < len(ret.A[0]); y++ {
+			ret.A[y][x] = (Value(1-((x+y)%2)*2) * mutable.Minor(x, y).Determinant()) / determinamnt
+		}
+	}
+	return ret
+}

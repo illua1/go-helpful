@@ -26,6 +26,7 @@ type Matrix_Main_Functions[Value value.Values] interface {
 	Scale(size Value)
 
 	Minor(x, y int) Matrix_Main_Functions[Value]
+	Determinant() Value
 }
 
 func init() {
