@@ -181,8 +181,8 @@ func (b Boxe[Value]) Points() [8]Point[Value] {
 		Point[Value]{b.Min.X, b.Max.Y, b.Min.Z},
 		Point[Value]{b.Min.X, b.Max.Y, b.Max.Z},
 		Point[Value]{b.Max.X, b.Min.Y, b.Min.Z},
-		Point[Value]{b.Max.X, b.Min.Y, b.Max.Z},
 		Point[Value]{b.Max.X, b.Max.Y, b.Min.Z},
+		Point[Value]{b.Max.X, b.Min.Y, b.Max.Z},
 		b.Max,
 	}
 }
@@ -207,9 +207,9 @@ func (b Boxe[Value]) Edges() [12][2]int {
 		[2]int{3, 0},
     //
 		[2]int{4, 5},
-		[2]int{5, 4},
+		[2]int{5, 6},
 		[2]int{6, 7},
-		[2]int{7, 6},
+		[2]int{7, 4},
     //
 		[2]int{0, 4},
 		[2]int{1, 5},
