@@ -193,9 +193,9 @@ func (b Boxe[Value]) FaceCentres() [6]Point[Value]{
     Point[Value]{centre.X, centre.Y, b.Min.Z},
     Point[Value]{centre.X, centre.Y, b.Max.Z},
     Point[Value]{centre.X, b.Min.Y, centre.Z},
-    Point[Value]{centre.X, b.Min.Y, centre.Z},
+    Point[Value]{centre.X, b.Max.Y, centre.Z},
     Point[Value]{b.Min.X, centre.Y, centre.Z},
-    Point[Value]{b.Min.X, centre.Y, centre.Z},
+    Point[Value]{b.Max.X, centre.Y, centre.Z},
   }
 }
 
