@@ -246,8 +246,8 @@ func (b Boxe[Value]) FaceArea() [6][2]Value {
   return [6][2]Value{
 		[2]Value{dx, dy},
 		[2]Value{-dx, -dy},
-		[2]Value{dy, dz},
-		[2]Value{-dy, -dz},
+		[2]Value{dz, dy},
+		[2]Value{-dz, -dy},
 		[2]Value{dx, dz},
 		[2]Value{-dx, -dz},
 	}
