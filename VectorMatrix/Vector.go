@@ -66,7 +66,7 @@ func (vector *Vector[Value, Length]) Length() Value {
 }
 
 func (vector *Vector[Value, Length]) Normalize() {
-	vector.Scale(vector.Length())
+	vector.Scale(1/vector.Length())
 }
 
 //  Cast(
