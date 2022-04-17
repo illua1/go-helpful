@@ -1,6 +1,7 @@
 package helpful_vector_matrix
 
 import (
+  "math"
 	value "github.com/illua1/go-helpful"
 )
 
@@ -50,6 +51,24 @@ func (vector *Vector[Value, Length]) Div(a Vector[Value, Length]) {
 	}
 }
 
+func (vector *Vector[Value, Length]) Scale(s Value) {
+	for i := 0; i < len(vector.A); i++ {
+		vector.A[i] = vector.A[i] * s
+	}
+}
+
+func (vector *Vector[Value, Length]) Length() Value {
+	var length Value
+  for i := 0; i < len(vector.A); i++ {
+		length += vector.A[i]*vector.A[i]
+	}
+  return Value(math.Sqrt(float64(length)))
+}
+
+func (vector *Vector[Value, Length]) Normalize() {
+	vector.Scale(vector.Length())
+}
+
 //  Cast(
 //    Vector3[int](0),
 //    Vector3[float64](0),
@@ -92,7 +111,7 @@ func (vector *Vector[Value, Length]) Len() int {
 	return len(vector.A)
 }
 
-func (vector *Vector[Value, Length]) Mull_Scalar(a Vector[Value, Length]) (scalar Value) {
+func (vector *Vector[Value, Length]) Mul_Scalar(a Vector[Value, Length]) (scalar Value) {
 	for i := 0; i < len(vector.A); i++ {
 		scalar += vector.A[i] * a.A[i]
 	}
