@@ -240,6 +240,19 @@ func (b Boxe[Value]) FacePoints() [6][4]int {
 	}
 }
 
+func (b Boxe[Value]) FaceArea() [6][2]Value {
+	dx, dy, dz := b.Dx(), b.Dy(), b.Dz()
+  dx, dy, dz = dx/2, dy/2, dz/2
+  return [6][2]Value{
+		[2]Value{dx, dy},
+		[2]Value{-dx, -dy},
+		[2]Value{dy, dz},
+		[2]Value{-dy, -dz},
+		[2]Value{dx, dz},
+		[2]Value{-dx, -dz},
+	}
+}
+
 /*
 func (b Boxe[Value]) FaceCentres() (ret [6]Point[Value]){
 	points := b.Points()
