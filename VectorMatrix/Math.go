@@ -11,3 +11,7 @@ func Abc[Value value.Values](a Value)Value{
     return -a
   }
 }
+
+func Lerp[T, F value.Values](a, b T, f F)T{
+  return a+T(F(b-a)*f)
+}
