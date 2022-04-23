@@ -262,6 +262,18 @@ const (
   TailFace
 )
 
+func FaceOpposite(index int)int{
+  var Opposites = [6]int{
+    BottomFace,
+    TopFace,
+    RigthFace,
+    LeftFace,
+    TailFace,
+    FrontFace,
+  }
+  return Opposites[index]
+}
+
 const (
   A_top_Edges = iota
   B_top_Edges
