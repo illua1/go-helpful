@@ -187,6 +187,26 @@ func (b Box[Value]) Points() [8]Point[Value] {
 	}
 }
 
+func (b Box[Value]) Colise(a Box[Value]) bool {
+	if in(a.Min.X, a.Max.X, b.Min.X, b.Max.X) {
+    if in(a.Min.Y, a.Max.Y, b.Min.Y, b.Max.Y) {
+      if in(a.Min.Z, a.Max.Z, b.Min.Z, b.Max.Z) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
+func in[Value value.Values](min, max, in_min, in_max Value)bool {
+  if (min < in_min)&&(in_min < max) {
+    return true
+  } else{
+    return (min < in_max)&&(in_max < max)
+  }
+  return false
+}
+
 func (b Box[Value]) FaceCentres() [6]Point[Value] {
 	centre := b.Centre()
 	return [6]Point[Value]{
