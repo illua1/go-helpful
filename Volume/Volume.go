@@ -199,10 +199,10 @@ func (b Box[Value]) Colise(a Box[Value]) bool {
 }
 
 func in[Value value.Values](min, max, in_min, in_max Value)bool {
-  if (min < in_min)&&(in_min < max) {
+  if (min <= in_min)&&(in_min <= max) {
     return true
   } else{
-    return (min < in_max)&&(in_max < max)
+    return (min <= in_max)&&(in_max <= max)
   }
   return false
 }
