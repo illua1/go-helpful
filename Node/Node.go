@@ -12,9 +12,9 @@ type BNode[T any] struct {
 
 func (n BNode[T]) String() string {
 	return fmt.Sprint(
-		ter.Ternary(n.L != nil, n.L.String()+", ", ""),
+		ter.Ternary(n.L != nil, n.L.String(), ""),
 		fmt.Sprint(n.Contain),
-		ter.Ternary(n.R != nil, ", "+n.R.String(), ""),
+		ter.Ternary(n.R != nil, n.R.String(), ""),
 	)
 }
 
