@@ -233,9 +233,8 @@ func (matrix Matrix[Value, Row, Column]) Mull(B Matrix[Value, Row, Column]) (C M
 	for x := 0; x < len_; x++ {
 		for y := 0; y < len_; y++ {
 			for i := 0; i < len_; i++ {
-				C.A[x][y] += matrix.A[x][i] * B.A[i][y]
+				C.A[x][y] += matrix.A[i][x] * B.A[y][i]
 			}
-      //fmt.Println(C)
 		}
 	}
 	return
