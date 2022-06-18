@@ -2,7 +2,6 @@ package helpful_node
 
 import (
 	"fmt"
-	//ter "github.com/illua1/go-helpful/If"
 )
 
 type BNode[T any] struct {
@@ -11,12 +10,6 @@ type BNode[T any] struct {
 }
 
 func (n BNode[T]) String() string {
-	/*
-  return fmt.Sprint(
-		ter.Ternary(n.L != nil, n.L.String(), ""),
-		fmt.Sprint(n.Contain),
-		ter.Ternary(n.R != nil, n.R.String(), ""),
-	)*/
   var ret string
   if n.L != nil {
     ret += n.L.String()+", "
