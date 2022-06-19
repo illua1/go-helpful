@@ -49,7 +49,14 @@ func(lNode *LNode[T])Del(){
     lNode.L = nil
     lNode.R = nil
   } else{
-    
+    if lNode.L != nil {
+      lNode.L.R = nil
+      lNode.L = nil
+    }
+    if lNode.R != nil {
+      lNode.R.L = nil
+      lNode.R = nil
+    }
   }
 }
 
