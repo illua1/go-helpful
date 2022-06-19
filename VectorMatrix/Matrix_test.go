@@ -113,13 +113,13 @@ func TestMatrixMultiplication(t *testing.T) {
 	}
 	m3 := Matrix[int, [3]int, [3][3]int]{
 		[3][3]int{
-			[3]int{30, 24, 18},
-			[3]int{84, 69, 54},
-			[3]int{138, 114, 90},
+			[3]int{30, 84, 138},
+			[3]int{24, 69, 114},
+			[3]int{18, 54, 90},
 		},
 	}
-	if m1.Mull(m2) != m3 {
-		t.Error("Matrix (3x3) multiplication corrupt\n", m1, "\n", m2, "\n", m3, "\n", m1.Mull(m2))
+	if m2.Mull(m1) != m3 {
+		t.Error("Matrix (3x3) multiplication corrupt\n", m2, "\n", m1, "\n", m3, "\n", m2.Mull(m1))
 	}
 }
 
@@ -252,7 +252,7 @@ func TestMatrixInvert(t *testing.T) {
 	var m2 = m.Invert()
 
 	var m_t1 = Matrix4x4[float64]()
-	var m_t2 = m2.Mull(m)
+	var m_t2 = m.Mull(m2)
 
 	var m_int_t1 = Matrix4x4[int]()
 	var m_int_t2 = Matrix4x4[int]()
