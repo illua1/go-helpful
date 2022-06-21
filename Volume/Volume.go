@@ -189,22 +189,22 @@ func (b Box[Value]) Points() [8]Point[Value] {
 
 func (b Box[Value]) Colise(a Box[Value]) bool {
 	if in(a.Min.X, a.Max.X, b.Min.X, b.Max.X) {
-    if in(a.Min.Y, a.Max.Y, b.Min.Y, b.Max.Y) {
-      if in(a.Min.Z, a.Max.Z, b.Min.Z, b.Max.Z) {
-        return true
-      }
-    }
-  }
-  return false
+		if in(a.Min.Y, a.Max.Y, b.Min.Y, b.Max.Y) {
+			if in(a.Min.Z, a.Max.Z, b.Min.Z, b.Max.Z) {
+				return true
+			}
+		}
+	}
+	return false
 }
 
-func in[Value value.Values](min, max, in_min, in_max Value)bool {
-  if (min <= in_min)&&(in_min <= max) {
-    return true
-  } else{
-    return (min <= in_max)&&(in_max <= max)
-  }
-  return false
+func in[Value value.Values](min, max, in_min, in_max Value) bool {
+	if (min <= in_min) && (in_min <= max) {
+		return true
+	} else {
+		return (min <= in_max) && (in_max <= max)
+	}
+	return false
 }
 
 func (b Box[Value]) FaceCentres() [6]Point[Value] {
@@ -262,8 +262,8 @@ func (b Box[Value]) FacePoints() [6][4]int {
 
 func (b Box[Value]) FaceArea() [6][2]Value {
 	dx, dy, dz := b.Dx(), b.Dy(), b.Dz()
-  dx, dy, dz = dx/2, dy/2, dz/2
-  return [6][2]Value{
+	dx, dy, dz = dx/2, dy/2, dz/2
+	return [6][2]Value{
 		[2]Value{dx, dy},
 		[2]Value{-dx, -dy},
 		[2]Value{dx, dz},
@@ -274,54 +274,54 @@ func (b Box[Value]) FaceArea() [6][2]Value {
 }
 
 const (
-  TopFace = iota
-  BottomFace
-  LeftFace
-  RigthFace
-  FrontFace
-  TailFace
+	TopFace = iota
+	BottomFace
+	LeftFace
+	RigthFace
+	FrontFace
+	TailFace
 )
 
-func FaceOpposite(index int)int{
-  var Opposites = [6]int{
-    BottomFace,
-    TopFace,
-    RigthFace,
-    LeftFace,
-    TailFace,
-    FrontFace,
-  }
-  return Opposites[index]
+func FaceOpposite(index int) int {
+	var Opposites = [6]int{
+		BottomFace,
+		TopFace,
+		RigthFace,
+		LeftFace,
+		TailFace,
+		FrontFace,
+	}
+	return Opposites[index]
 }
 
 const (
-  A_top_Edges = iota
-  B_top_Edges
-  C_top_Edges
-  D_top_Edges
-  A_bottom_Edges
-  B_bottom_Edges
-  C_bottom_Edges
-  D_bottom_Edges
-  A_centre_Edges
-  B_centre_Edges
-  C_centre_Edges
-  D_centre_Edges
+	A_top_Edges = iota
+	B_top_Edges
+	C_top_Edges
+	D_top_Edges
+	A_bottom_Edges
+	B_bottom_Edges
+	C_bottom_Edges
+	D_bottom_Edges
+	A_centre_Edges
+	B_centre_Edges
+	C_centre_Edges
+	D_centre_Edges
 )
 
 const (
-  A_Point = iota
-  B_Point
-  C_Point
-  D_Point
-  E_Point
-  F_Point
-  G_Point
-  H_Point
+	A_Point = iota
+	B_Point
+	C_Point
+	D_Point
+	E_Point
+	F_Point
+	G_Point
+	H_Point
 )
 
 /*
-  
+
   TopFace = {
     A_top_Edges = {
       A_Point
@@ -340,7 +340,7 @@ const (
       A_Point
     }
   }
-  
+
   BottomFace = {
     A_bottom_Edges = {
       E_Point
@@ -359,56 +359,56 @@ const (
       E_Point
     }
   }
-  
+
   LeftFace = {
     A_top_Edges
     A_centre_Edges
     A_bottom_Edges
     B_centre_Edges
   }
-  
+
   FrontFace = {
     B_top_Edges
     B_centre_Edges
     B_bottom_Edges
     C_centre_Edges
   }
-  
+
   RigthFace = {
     C_top_Edges
     C_centre_Edges
     C_bottom_Edges
     D_centre_Edges
   }
-  
+
   TailFace = {
     D_top_Edges
     D_centre_Edges
     D_bottom_Edges
     A_centre_Edges
   }
-  
+
   A_centre_Edges = {
     A_Point
     E_Point
   }
-  
+
   B_centre_Edges = {
     B_Point
     F_Point
   }
-  
+
   C_centre_Edges = {
     C_Point
     G_Point
   }
-  
+
   D_centre_Edges = {
     D_Point
     H_Point
   }
-  
-  
+
+
 */
 
 type BoxContainerFaces[T any] [6]T

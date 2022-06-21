@@ -1,8 +1,8 @@
 package helpful_vector_matrix
 
 import (
-  "math"
 	value "github.com/illua1/go-helpful"
+	"math"
 )
 
 type Vector[
@@ -59,14 +59,14 @@ func (vector *Vector[Value, Length]) Scale(s Value) {
 
 func (vector *Vector[Value, Length]) Length() Value {
 	var length Value
-  for i := 0; i < len(vector.A); i++ {
-		length += vector.A[i]*vector.A[i]
+	for i := 0; i < len(vector.A); i++ {
+		length += vector.A[i] * vector.A[i]
 	}
-  return Value(math.Sqrt(float64(length)))
+	return Value(math.Sqrt(float64(length)))
 }
 
 func (vector *Vector[Value, Length]) Normalize() {
-	vector.Scale(1/vector.Length())
+	vector.Scale(1 / vector.Length())
 }
 
 //  Cast(
@@ -165,57 +165,57 @@ func (vector *Vector[Value, Length]) Mull_Matrix(a Vector[Value, Length])(scalar
 
 */
 
-func Vector2[Value value.Values](x,y Value)Vector[Value, [2]Value]{
-  return Vector[Value, [2]Value]{
-    A : [2]Value{
-      x,
-      y,
-    },
-  }
+func Vector2[Value value.Values](x, y Value) Vector[Value, [2]Value] {
+	return Vector[Value, [2]Value]{
+		A: [2]Value{
+			x,
+			y,
+		},
+	}
 }
 
-func Vector3[Value value.Values](x,y,z Value)Vector[Value, [3]Value]{
-  return Vector[Value, [3]Value]{
-    A : [3]Value{
-      x,
-      y,
-      z,
-    },
-  }
+func Vector3[Value value.Values](x, y, z Value) Vector[Value, [3]Value] {
+	return Vector[Value, [3]Value]{
+		A: [3]Value{
+			x,
+			y,
+			z,
+		},
+	}
 }
 
-func Vector4[Value value.Values](x,y,z,w Value)Vector[Value, [4]Value]{
-  return Vector[Value, [4]Value]{
-    A : [4]Value{
-      x,
-      y,
-      z,
-      w,
-    },
-  }
+func Vector4[Value value.Values](x, y, z, w Value) Vector[Value, [4]Value] {
+	return Vector[Value, [4]Value]{
+		A: [4]Value{
+			x,
+			y,
+			z,
+			w,
+		},
+	}
 }
 
-func Vector5[Value value.Values](x,y,z,w,q Value)Vector[Value, [5]Value]{
-  return Vector[Value, [5]Value]{
-    A : [5]Value{
-      x,
-      y,
-      z,
-      w,
-      q,
-    },
-  }
+func Vector5[Value value.Values](x, y, z, w, q Value) Vector[Value, [5]Value] {
+	return Vector[Value, [5]Value]{
+		A: [5]Value{
+			x,
+			y,
+			z,
+			w,
+			q,
+		},
+	}
 }
 
-func Vector6[Value value.Values](x,y,z,w,q,k Value)Vector[Value, [6]Value]{
-  return Vector[Value, [6]Value]{
-    A : [6]Value{
-      x,
-      y,
-      z,
-      w,
-      q,
-      k,
-    },
-  }
+func Vector6[Value value.Values](x, y, z, w, q, k Value) Vector[Value, [6]Value] {
+	return Vector[Value, [6]Value]{
+		A: [6]Value{
+			x,
+			y,
+			z,
+			w,
+			q,
+			k,
+		},
+	}
 }

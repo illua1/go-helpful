@@ -10,15 +10,15 @@ type BNode[T any] struct {
 }
 
 func (n BNode[T]) String() string {
-  var ret string
-  if n.L != nil {
-    ret += n.L.String()+", "
-  }
-  ret += fmt.Sprint(n.Contain)
-  if n.R != nil {
-    ret += ", "+n.R.String()
-  }
-  return ret
+	var ret string
+	if n.L != nil {
+		ret += n.L.String() + ", "
+	}
+	ret += fmt.Sprint(n.Contain)
+	if n.R != nil {
+		ret += ", " + n.R.String()
+	}
+	return ret
 }
 
 func NewBNode[T any](l, r *BNode[T], t T) BNode[T] {
