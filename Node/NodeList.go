@@ -86,7 +86,7 @@ func ToEndR[T any](lNode **LNode[T]) *LNode[T] {
 
 func LenL[T any](lNode **LNode[T]) int {
 	if l, ok := NoNil(lNode); ok {
-		i := 1
+		i := 0
 		for ; l.L != nil; l = l.L {
 			i++
 		}
@@ -97,8 +97,22 @@ func LenL[T any](lNode **LNode[T]) int {
 
 func LenR[T any](lNode **LNode[T]) int {
 	if r, ok := NoNil(lNode); ok {
-		i := 1
+		i := 0
 		for ; r.R != nil; r = r.R {
+			i++
+		}
+		return i
+	}
+	return 0
+}
+
+func Len[T any](lNode **LNode[T]) int {
+	if l, ok := NoNil(lNode); ok {
+		i := -1
+		for L := l; L.L != nil; L = L.L {
+			i++
+		}
+		for ; l.L != nil; l = l.L {
 			i++
 		}
 		return i
@@ -178,69 +192,35 @@ func Del[T any](lNode **LNode[T]) {
 }
 
 func For[T any](lNode **LNode[T], do func(contain T)) {
-	if *lNode != nil {
-		var lNode_p *LNode[T] = *lNode
-		for {
-			do(lNode_p.Contain)
-			if lNode_p.L != nil {
-				lNode_p = lNode_p.L
-			} else {
-				return
-			}
+	if node_l, ok := NoNil(lNode); ok {
+		for ; node_l.L != nil; node_l = node_l.L {
+			do(node_l.Contain)
 		}
 	}
 }
 
 func ForI[T any](lNode **LNode[T], do func(index int, contain T)) {
-	if *lNode != nil {
-		var lNode_p *LNode[T] = *lNode
-		var index int = 0
-		for {
-			do(index, lNode_p.Contain)
-			if lNode_p.L != nil {
-				lNode_p = lNode_p.L
-			} else {
-				return
-			}
-			index++
+	if node_l, ok := NoNil(lNode); ok {
+		i := 0
+		for ; node_l.L != nil; node_l = node_l.L {
+			do(i, node_l.Contain)
+			i++
 		}
 	}
 }
 
 func ForParallel[T any](lNode **LNode[T], do func(index int, contain T)) {
-	if *lNode != nil {
-		var lNode_p *LNode[T] = *lNode
-		var index int = 0
+	if node_l, ok := NoNil(lNode); ok {
 		var group sync.WaitGroup
-		for {
-			go func() {
+		i := -1
+		for ; node_l.L != nil; node_l = node_l.L {
+			i++
+			go func(i int) {
 				group.Add(1)
-				do(index, lNode_p.Contain)
+				do(i, node_l.Contain)
 				group.Done()
-			}()
-			if lNode_p.L != nil {
-				lNode_p = lNode_p.L
-			} else {
-				return
-			}
-			index++
+			}(i)
 		}
 		group.Wait()
 	}
-}
-
-func Len[T any](lNode **LNode[T]) int {
-	var count int = 0
-	if *lNode != nil {
-		var lNode_p *LNode[T] = *lNode
-		for {
-			count++
-			if lNode_p.L != nil {
-				lNode_p = lNode_p.L
-			} else {
-				return count
-			}
-		}
-	}
-	return 0
 }
